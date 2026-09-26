@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>المحسن ستور - تسجيل الدخول</title>
+<style>
+/* ===== 🎨 عدّل الألوان من هنا فقط ===== */
+:root{
+  --page-bg:#a00303;       /* خلفية الصفحة */
+  --box-bg:#ffffff;        /* خلفية الصندوق */
+  --text-color:#222222;    /* لون الكتابة */
+  --muted-color:#666666;  /* النص الصغير */
+  --input-border:#dddddd; /* حدود الخانات */
+  --button-bg:#960505;    /* لون الزر */
+  --button-text:#ffffff;  /* كتابة الزر */
+  --message-color:#960505;
+}
+
+/* ===== 📐 شكل الصفحة ===== */
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{
+  margin:0;
+  background:var(--page-bg);
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  color:var(--text-color);
+}
+.box{
+  width:min(440px,92%);
+  background:var(--box-bg);
+  color:var(--text-color);
+  border-radius:15px;
+  padding:25px;
+  box-shadow:0 5px 25px #0003;
+}
+
+/* ===== 📝 الخانات ===== */
+input,select{
+  width:100%;
+  padding:12px;
+  margin:7px 0;
+  border:1px solid var(--input-border);
+  border-radius:8px;
+  background:#fff;
+  color:var(--text-color);
+}
+
+/* ===== 🔘 الزر ===== */
+button{
+  width:100%;
+  background:var(--button-bg);
+  color:var(--button-text);
+  border:0;
+  padding:12px;
+  border-radius:8px;
+  margin-top:10px;
+  cursor:pointer;
+}
+button:disabled{opacity:.6;cursor:not-allowed}
+
+/* ===== 🔗 الروابط والرسائل ===== */
+.link{text-align:center;margin-top:14px}
+.link a{color:var(--button-bg)}
+.msg{color:var(--message-color);min-height:20px;line-height:1.7}
+.small{font-size:13px;color:var(--muted-color);margin-top:6px;line-height:1.7}
+
+/* ===== 🛒 بيانات البائع ===== */
+.seller{display:none}
+.seller.show{display:block}
+</style></head>
+<body><div class="box"><h1 id="storeTitle">المحسن ستور</h1><h2 id="title">تسجيل الدخول</h2>
+<div id="signupFields" class="seller">
+<label>نوع الحساب<select id="accountType"><option value="customer">مشتري</option><option value="seller">بائع</option></select></label>
+<label id="nameWrap" class="seller">اسمك بالكامل<input id="fullName" type="text" placeholder="الاسم بالكامل" autocomplete="name"></label>
+<label id="storeWrap" class="seller">اسم المتجر أو النشاط<input id="storeName" type="text" placeholder="اسم المتجر"></label>
+<label id="addressWrap" class="seller">العنوان / مكان النشاط<input id="address" type="text" placeholder="العنوان"></label>
+</div>
+<input id="email" type="email" placeholder="البريد الإلكتروني" autocomplete="email">
+<input id="phone" type="tel" placeholder="رقم الهاتف" autocomplete="tel" style="display:none">
+<input id="password" type="password" placeholder="كلمة المرور" autocomplete="current-password">
+<button id="action" type="button">دخول</button>
+<div class="link"><a href="#" id="toggle">ليس لديك حساب؟ إنشاء حساب</a></div><p id="msg" class="msg" role="alert"></p>
+<p class="small">بيانات البائع الأساسية (الاسم والبريد والهاتف وبيانات النشاط) تصل إلى المدير للمراجعة. كلمة المرور لا يتم حفظها أو إرسالها للمدير.</p></div>
+<!--
+====================================================
+✏️ التعديل السريع:
+- الألوان: غيّرها في :root أعلى الملف.
+- اسم المتجر: غيّر النص داخل #storeTitle.
+- عنوان الصفحة: غيّر النص داخل #title.
+- لا تعدّل JavaScript بالأسفل إذا لم تكن تريد
+  تغيير طريقة تسجيل الدخول والتسجيل.
+====================================================
+-->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script>
+<script>
+'use strict';
+const db=supabase.createClient(STORE_CONFIG.SUPABASE_URL,STORE_CONFIG.SUPABASE_ANON_KEY);const ADMIN_UID='909bc6ab-d966-49f3-b8e9-3b59d091868c';
+const $=id=>document.getElementById(id); let signupMode=false;
+function refreshType(){
+ const seller=$('accountType').value==='seller';
+ ['nameWrap','storeWrap','addressWrap'].forEach(id=>$(id).classList.toggle('show',seller));
+}
+$('accountType').onchange=refreshType;
+$('toggle').onclick=e=>{e.preventDefault();signupMode=!signupMode;$('title').textContent=signupMode?'إنشاء حساب':'تسجيل الدخول';$('action').textContent=signupMode?'إنشاء الحساب':'دخول';$('toggle').textContent=signupMode?'لديك حساب؟ تسجيل الدخول':'ليس لديك حساب؟ إنشاء حساب';$('signupFields').classList.toggle('show',signupMode);$('phone').style.display=signupMode?'block':'none';$('msg').textContent='';if(signupMode)refreshType();};
+$('action').onclick=async()=>{
+ const email=$('email').value.trim(), password=$('password').value, phone=$('phone').value.trim(); $('msg').textContent='';
+ if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ $('msg').textContent='اكتب بريدًا إلكترونيًا صحيحًا.';return;}
+ if(signupMode && !phone){$('msg').textContent='اكتب رقم الهاتف.';return;}
+ if(signupMode && !/^[0-9+\s()-]{7,20}$/.test(phone)){ $('msg').textContent='اكتب رقم هاتف صحيح.';return;}
+ if(password.length<6){$('msg').textContent='كلمة المرور يجب أن تكون 6 أحرف على الأقل.';return;}
+ if(signupMode && $('accountType').value==='seller'){
+   if(!$('fullName').value.trim()||!$('storeName').value.trim()||!$('address').value.trim()){$('msg').textContent='اكتب الاسم واسم المتجر والعنوان للبائع.';return;}
+ }
+ $('action').disabled=true;
+ try{
+  if(signupMode){
+   const type=$('accountType').value;
+   const {data,error}=await db.auth.signUp({email,password,options:{data:{phone,account_type:type,full_name:$('fullName').value.trim(),store_name:$('storeName').value.trim(),address:$('address').value.trim()}}});
+   if(error) throw error;
+   if(data.session){ const uid=data.session.user.id; const {data:profile}=await db.from('profiles').select('account_type').eq('id',uid).maybeSingle(); const type=uid===ADMIN_UID?'admin':profile?.account_type; location.href=type==='seller'?'seller-dashboard.html':type==='admin'?'admin-dashboard.html':'buyer-dashboard.html'; }
+   else $('msg').textContent=type==='seller'?'تم إنشاء طلب البائع. بعد تأكيد البريد، سيظهر طلبك للمدير للمراجعة.':'تم إنشاء الحساب. إذا ظهر طلب تأكيد البريد، أكّد بريدك ثم سجّل الدخول.';
+  }else{
+   const {data,error}=await db.auth.signInWithPassword({email,password}); if(error) throw error; const uid=data.user.id; const {data:profile}=await db.from('profiles').select('account_type').eq('id',uid).maybeSingle(); const type=uid===ADMIN_UID?'admin':profile?.account_type; location.href=type==='seller'?'seller-dashboard.html':type==='admin'?'admin-dashboard.html':'buyer-dashboard.html';
+  }
+ }catch(e){$('msg').textContent=e.message||'حدث خطأ غير متوقع. تأكد من إعداد Supabase ومفتاحه.';}
+ finally{$('action').disabled=false;}
+};
+</script></body></html>
