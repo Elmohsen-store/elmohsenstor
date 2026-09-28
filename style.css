@@ -14,4 +14,4 @@ body.menu-open{overflow:hidden}
 @media(max-width:600px){.menu-toggle{top:12px;right:12px;width:44px;height:44px;font-size:25px}.side-menu{width:285px}.header-inner{padding-right:68px}.shop-header .header-inner{padding-right:68px}}
 
 /* المحسن ستور - القائمة الجانبية */
-.side-links a{color:#222;text-decoration:none}.side-links a:active{background:#f7e8e8}.menu-toggle{cursor:pointer}.side-close{cursor:pointer}
+.side-links a{color:#222;text-decoration:none}.side-links a:active{background:#8d0808}.menu-toggle{cursor:pointer}.side-close{cursor:pointer}
