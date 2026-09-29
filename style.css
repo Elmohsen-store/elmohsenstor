@@ -22,8 +22,8 @@ body.menu-open{overflow:hidden}
 }
 
 .brand img {
-  width: 120px;
-  height: 65px;
+  width: 10px;
+  height: 20px;
   object-fit: contain;
   display: block;
 }
