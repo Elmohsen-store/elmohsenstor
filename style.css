@@ -15,7 +15,7 @@ body.menu-open{overflow:hidden}
 
 /* المحسن ستور - القائمة الجانبية */
 .menu{
-    background-color: #123;
+    background-color: rgb(241, 242, 243);
     width: 60px;
     height: 100vh;
     padding: 20px;
