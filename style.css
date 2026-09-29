@@ -15,15 +15,3 @@ body.menu-open{overflow:hidden}
 
 /* المحسن ستور - القائمة الجانبية */
 .side-links a{color:#222;text-decoration:none}.side-links a:active{background:#8d0808}.menu-toggle{cursor:pointer}.side-close{cursor:pointer}
-.brand {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.brand img {
-  width: 120px;
-  height: 65px;
-  object-fit: contain;
-  display: block;
-}
