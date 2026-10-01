@@ -14,11 +14,6 @@ body{margin:0;
 .img-box img{
     width: 100%;
 }
-.profile{
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
     a{text-decoration:none;color:inherit}
     button,input,textarea,select{font:inherit}
     button{cursor:pointer}.top-strip{background:#a00303;
