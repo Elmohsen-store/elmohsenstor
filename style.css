@@ -19,14 +19,29 @@ html{scroll-behavior:smooth}body{margin:0;
   border-radius:8px;overflow:hidden}.search-box input{flex:1;border:0;outline:0;padding:13px}.search-box button,.cart-btn{background:#a00303;color:#fff;padding:12px 20px;border:0}.header-actions,.nav-inner{gap:24px}.nav-inner{min-height:48px;padding-top:0;padding-bottom:0}.hero-shop{max-width:1200px;margin:20px auto 0;min-height:260px;border-radius:14px;background:linear-gradient(110deg,#a00303,#680000);color:#fff;padding:45px 55px;display:flex;align-items:center}.hero-shop h1{font-size:36px;margin:10px 0}.hero-btn{display:inline-block;background:#fff;color:#a00303;padding:12px 20px;border-radius:6px;font-weight:bold}.benefits{max-width:1200px;margin:18px auto;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.benefits div{background:#fff;border:1px solid #eee;border-radius:10px;padding:18px;text-align:center}.benefits b,.benefits small{display:block}.benefits small{color:#777;margin-top:5px}.container{max-width:1200px;margin:auto;padding:0 20px}.shop-section{margin-top:35px}.section-title{display:flex;justify-content:space-between;align-items:end;margin-bottom:18px}.section-title h2{margin:0}.section-title span{color:#777}.category-row{display:flex;gap:10px;overflow:auto}.cat-btn{background:#fff;border:1px solid #ddd;border-radius:22px;padding:10px 18px;white-space:nowrap}.cat-btn.active,.cat-btn:hover{background:#a00303;color:#fff}.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product-card{background:#fff;border:1px solid #eee;border-radius:12px;overflow:hidden;transition:.2s}.product-card:hover{box-shadow:0 8px 25px #0001;transform:translateY(-2px)}.product-image-wrap{height:220px;background:#fff;display:flex;align-items:center;justify-content:center;position:relative}.product-img{max-width:100%;max-height:100%;object-fit:contain;position:relative;z-index:1}.fallback-icon{position:absolute;font-size:70px}.product-body{padding:15px}.product-name{display:block;font-weight:bold;line-height:1.6;min-height:50px}.price{font-size:20px;font-weight:900;color:#a00303;margin:12px 0}.cart-btn{width:100%;border-radius:6px;font-weight:bold}.card{background:#fff;border:1px solid #eee;border-radius:10px;padding:18px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}.row{display:flex;gap:15px}.btn{display:inline-block;background:#a00303;color:#fff;padding:10px 16px;border-radius:6px}.secondary{background:#333;color:#fff}.danger{background:#b00020;color:#fff}.empty{text-align:center;background:#fff;border:1px dashed #ccc;padding:35px;border-radius:10px;color:#777}.muted{color:#777}.toast{position:fixed;bottom:25px;right:25px;background:#222;color:#fff;padding:13px 18px;border-radius:7px;display:none;z-index:99}.badge{background:#eee;padding:5px 10px;border-radius:15px}input,textarea,select{width:100%;padding:11px;border:1px solid #ddd;border-radius:6px;margin:7px 0}form button{background:#a00303;color:#fff;padding:11px 18px;border-radius:6px}@media(max-width:900px){.product-grid{grid-template-columns:repeat(3,1fr)}.header-inner{flex-wrap:wrap}.search-box{order:3;flex-basis:100%}.benefits{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.product-grid{grid-template-columns:repeat(2,1fr);gap:10px}.product-image-wrap{height:160px}.hero-shop{margin:10px;padding:28px 22px}.hero-shop h1{font-size:25px}.benefits{grid-template-columns:repeat(2,1fr)}.brand{font-size:23px}}
 
 /* ===== القائمة الجانبية الجديدة ===== */
-
+.menu-toggle{position:fixed;top:16px;right:18px;
+    width:48px;height:48px;border:0;
+    border-radius:10px;
+    background:#a00303;color:#fff;
+    font-size:28px;line-height:1;
+    z-index:9999;
+    -shadow:0 5px 18px #0003;
+    display:flex;align-items:center;
+    justify-content:center}
+.side-menu{position:fixed;
+    top:0;
+    right:-330px;
+    width:310px;
+    max-width:85vw;
+    height:100vh;background:#fff;
+    z-index:1003;
+    box-shadow:-8px 0 30px #0002;
+    transition:right .25s ease;
+    overflow-y:auto}
 .side-overlay{position:fixed;inset:0;
     background:#0007;z-index:1002;
     opacity:0;visibility:hidden;
     transition:.25s}
-.menu-open .side-menu{right:0}
-.menu-open .side-overlay{opacity:1;
-    visibility:visible}
 .side-head{height:76px;padding:14px 18px;
     display:flex;
     align-items:center;
