@@ -164,3 +164,4 @@ async function product() {
     if (oldLd) oldLd.remove();
     let ld = document.createElement('script');
     ld.id = 'product-jsonld'; ld.type = 'application/ld+json';
+
