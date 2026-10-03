@@ -144,7 +144,7 @@ function renderProductRows(rows) {
     grid.innerHTML = rows.map(p => `<article class="product-card"><a class="product-image-wrap" href="product.html?id=${encodeURIComponent(p.id)}"><img class="product-img" src="${esc(p.image_url || '')}" onerror="this.style.display='none'"><div class="fallback-icon">${esc(p.icon || '🛍️')}</div></a><div class="product-body"><a class="product-name" href="product.html?id=${encodeURIComponent(p.id)}">${esc(p.name)}</a><div class="price">${money(p.price)}</div><button class="cart-btn" onclick='add(${JSON.stringify(p.id)})'>أضف للسلة</button></div></article>`).join('') || '<div class="empty">لا توجد منتجات.</div>';
 }
 
-async function product() {
+async function product() 
     layout('تفاصيل المنتج');
     let id = Q.get('id'), { data: p } = await db.from('products').select('*,profiles(full_name,store_name)').eq('id', id).single();
     if (!p) { document.querySelector('main').innerHTML = '<div class="empty">المنتج غير موجود.</div>'; return; }
