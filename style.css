@@ -332,13 +332,52 @@ button{
   visibility:hidden;
   transition:.25s
 }
-.menu-open .side-menu{right:0}
-.menu-open .side-overlay{opacity:1;visibility:visible}
-.side-head{height:76px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee}
-.side-brand{font-size:24px;font-weight:900;color:#a00303}.side-brand span{color:#222}
-.side-close{width:42px;height:42px;border:0;border-radius:8px;background:#f2f2f2;color:#222;font-size:30px;line-height:1}
-.side-links{padding:12px}.side-links a{display:block;padding:15px 14px;border-radius:9px;margin:4px 0;font-weight:700}.side-links a:hover{background:#f7e8e8;color:#a00303}
-body.menu-open{overflow:hidden}
+.menu-open .side-menu{
+  right:0;
+}
+.menu-open .side-overlay{
+  opacity:1;visibility:visible;
+}
+.side-head{
+  height:76px;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #eee;
+}
+.side-brand{
+  font-size:24px;
+  font-weight:900;
+  color:#a00303;
+}
+.side-brand span{
+  color:#222;
+}
+.side-close{
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:8px;
+  background:#f2f2f2;
+  color:#222;
+  font-size:30px;
+  line-height:1;
+}
+.side-links{
+  padding:12px;
+}
+.side-links a{
+  display:block;
+  padding:15px 14px;
+  border-radius:9px;
+  margin:4px 0;
+  font-weight:700;
+}
+  
+body.menu-open{
+  overflow:hidden;
+}
 @media(max-width:600px){.menu-toggle{top:12px;right:12px;width:44px;height:44px;font-size:25px}.side-menu{width:285px}.header-inner{padding-right:68px}.shop-header .header-inner{padding-right:68px}}
 
 /* المحسن ستور - القائمة الجانبية */
