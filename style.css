@@ -27,13 +27,24 @@ body.menu-open{overflow:hidden}
   object-fit: contain;
   display: block;
 }
-/* Responsive fixes */
-@media(max-width:600px){
-  .header-actions{width:100%;justify-content:center;gap:12px;flex-wrap:wrap}
-  .hero-shop{width:calc(100% - 20px);box-sizing:border-box}
-  .container{padding-left:12px;padding-right:12px}
-  .row{flex-direction:column;gap:0}
-  .card{overflow-x:auto}
-  table{display:block;max-width:100%;overflow-x:auto}
-  .toast{right:12px;left:12px;bottom:12px;text-align:center}
+
+/* Responsive improvements */
+@media (max-width: 900px){
+  .hero-shop{max-width:none;margin-left:12px;margin-right:12px;}
+  .benefits,.container,.shop-section{max-width:none;}
+  .header-actions{gap:12px;}
+}
+@media (max-width: 600px){
+  .header-inner{gap:10px;padding-left:12px;padding-right:64px;}
+  .brand img{width:95px;height:52px;}
+  .header-actions{width:100%;justify-content:space-between;font-size:14px;}
+  .search-box input{min-width:0;}
+  .search-box button{padding:10px 13px;}
+  .hero-shop{min-height:210px;padding:25px 18px;border-radius:10px;}
+  .hero-shop h1{line-height:1.35;}
+  .benefits{margin-left:12px;margin-right:12px;gap:8px;}
+  .benefits div{padding:12px 8px;font-size:14px;}
+  .product-name{font-size:14px;}
+  .price{font-size:18px;}
+  .row{flex-direction:column;gap:0;}
 }
