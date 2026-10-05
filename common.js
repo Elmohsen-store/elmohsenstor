@@ -12,7 +12,7 @@ async function toggleProduct(id,v){
 
   let r=await db
     .from('products')
-    .update({is_active:v})
+    .update({is_active:v});
     .eq('id',id);
 
   if(r.error){
