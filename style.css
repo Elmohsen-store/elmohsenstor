@@ -309,7 +309,7 @@ button{
   width:48px;height:48px;
   border:0;border-radius:10px;
   background:#a00303;
-  color:#123;
+  color:rgb(203, 215, 229);
   font-size:28px;line-height:1;
   z-index:9999;
   box-shadow:0 5px 18px rgba(218, 5, 5, 0.884);
@@ -319,7 +319,7 @@ button{
 .side-menu{
   position:fixed;top:0;
   right:-330px;width:310px;max-width:85vw;
-  height:100vh;background:#123;z-index:1003;
+  height:100vh;background:rgb(203, 2015, 229);z-index:1003;
   box-shadow:-8px 0 30px #0002;
   transition:right .25s ease;
   overflow-y:auto
@@ -374,11 +374,31 @@ button{
   margin:4px 0;
   font-weight:700;
 }
-  
+  .side-links a:hover{
+    background:#f7e8e8;
+    color:#a00303;
+  }
 body.menu-open{
   overflow:hidden;
 }
-@media(max-width:600px){.menu-toggle{top:12px;right:12px;width:44px;height:44px;font-size:25px}.side-menu{width:285px}.header-inner{padding-right:68px}.shop-header .header-inner{padding-right:68px}}
+@media(max-width:600px){
+  .menu-toggle{
+    top:12px;
+    right:12px;
+    width:44px;
+    height:44px;
+    font-size:25px;
+  }
+  .side-menu{
+    width:285px;
+  }
+  .header-inner{
+    padding-right:68px;
+  }
+  .shop-header .header-inner{
+    padding-right:68px;
+  }
+}
 
 /* المحسن ستور - القائمة الجانبية */
 .side-links a{
