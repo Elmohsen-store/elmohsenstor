@@ -39,7 +39,7 @@ async function admin(){
     {data:users},
     {data:products},
     {data:orders},
-    {data:apps}
+    {data:apps},
   ]=await Promise.all([
     db.from('profiles').select('id'),
     db.from('products').select('*').order('created_at',{ascending:false}),
