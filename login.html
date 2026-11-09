@@ -6,12 +6,12 @@
 /* ===== 🎨 عدّل الألوان من هنا فقط ===== */
 :root{
   --page-bg:#a00303;       /* خلفية الصفحة */
-  --box-bg:#ffffff;        /* خلفية الصندوق */
+  --box-bg:#967e7e;        /* خلفية الصندوق */
   --text-color:#222222;    /* لون الكتابة */
   --muted-color:#666666;  /* النص الصغير */
-  --input-border:#dddddd; /* حدود الخانات */
-  --button-bg:#960505;    /* لون الزر */
-  --button-text:#ffffff;  /* كتابة الزر */
+  --input-border:#241d1d; /* حدود الخانات */
+  --button-bg:#3f3c3c;    /* لون الزر */
+  --button-text:#8b8585;  /* كتابة الزر */
   --message-color:#960505;
 }
 
@@ -37,11 +37,11 @@ body{
 /* ===== 📝 الخانات ===== */
 input,select{
   width:100%;
-  padding:12px;
+  padding:20px;
   margin:7px 0;
   border:1px solid var(--input-border);
   border-radius:8px;
-  background:#fff;
+  background:#555050;
   color:var(--text-color);
 }
 
@@ -51,7 +51,7 @@ button{
   background:var(--button-bg);
   color:var(--button-text);
   border:0;
-  padding:12px;
+  padding:20px;
   border-radius:8px;
   margin-top:10px;
   cursor:pointer;
@@ -70,7 +70,7 @@ button:disabled{opacity:.6;cursor:not-allowed}
 </style></head>
 <body><div class="box"><h1 id="storeTitle">المحسن ستور</h1><h2 id="title">تسجيل الدخول</h2>
 <div id="signupFields" class="seller">
-<label>نوع الحساب<select id="accountType"><option value="customer">مشتري</option><option value="seller">بائع</option></select></label>
+<label>نوع الحساب<select id="accountType"><option value="buyer">مشتري</option><option value="seller">بائع</option></select></label>
 <label id="nameWrap" class="seller">اسمك بالكامل<input id="fullName" type="text" placeholder="الاسم بالكامل" autocomplete="name"></label>
 <label id="storeWrap" class="seller">اسم المتجر أو النشاط<input id="storeName" type="text" placeholder="اسم المتجر"></label>
 <label id="addressWrap" class="seller">العنوان / مكان النشاط<input id="address" type="text" placeholder="العنوان"></label>
@@ -94,11 +94,12 @@ button:disabled{opacity:.6;cursor:not-allowed}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script>
 <script>
 'use strict';
-const db=supabase.createClient(STORE_CONFIG.SUPABASE_URL,STORE_CONFIG.SUPABASE_ANON_KEY);const ADMIN_UID='909bc6ab-d966-49f3-b8e9-3b59d091868c';
+const db=window.supabaseClient;const ADMIN_UID='909bc6ab-d966-49f3-b8e9-3b59d091868c';
 const $=id=>document.getElementById(id); let signupMode=false;
 function refreshType(){
  const seller=$('accountType').value==='seller';
- ['nameWrap','storeWrap','addressWrap'].forEach(id=>$(id).classList.toggle('show',seller));
+ $('nameWrap').classList.add('show');
+ ['storeWrap','addressWrap'].forEach(id=>$(id).classList.toggle('show',seller));
 }
 $('accountType').onchange=refreshType;
 $('toggle').onclick=e=>{e.preventDefault();signupMode=!signupMode;$('title').textContent=signupMode?'إنشاء حساب':'تسجيل الدخول';$('action').textContent=signupMode?'إنشاء الحساب':'دخول';$('toggle').textContent=signupMode?'لديك حساب؟ تسجيل الدخول':'ليس لديك حساب؟ إنشاء حساب';$('signupFields').classList.toggle('show',signupMode);$('phone').style.display=signupMode?'block':'none';$('msg').textContent='';if(signupMode)refreshType();};
@@ -108,8 +109,9 @@ $('action').onclick=async()=>{
  if(signupMode && !phone){$('msg').textContent='اكتب رقم الهاتف.';return;}
  if(signupMode && !/^[0-9+\s()-]{7,20}$/.test(phone)){ $('msg').textContent='اكتب رقم هاتف صحيح.';return;}
  if(password.length<6){$('msg').textContent='كلمة المرور يجب أن تكون 6 أحرف على الأقل.';return;}
+ if(signupMode && !$('fullName').value.trim()){$('msg').textContent='اكتب اسمك بالكامل.';return;}
  if(signupMode && $('accountType').value==='seller'){
-   if(!$('fullName').value.trim()||!$('storeName').value.trim()||!$('address').value.trim()){$('msg').textContent='اكتب الاسم واسم المتجر والعنوان للبائع.';return;}
+   if(!$('storeName').value.trim()||!$('address').value.trim()){$('msg').textContent='اكتب الاسم واسم المتجر والعنوان للبائع.';return;}
  }
  $('action').disabled=true;
  try{
