@@ -694,5 +694,12 @@ async function loginPage(){
  login$('action').onclick=async()=>{const email=login$('email').value.trim(),password=login$('password').value,phone=login$('phone').value.trim();login$('msg').textContent='';if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){login$('msg').textContent='اكتب بريدًا إلكترونيًا صحيحًا.';return;}if(signupMode&&!phone){login$('msg').textContent='اكتب رقم الهاتف.';return;}if(signupMode&&!/^[0-9+\s()-]{7,20}$/.test(phone)){login$('msg').textContent='اكتب رقم هاتف صحيح.';return;}if(password.length<6){login$('msg').textContent='كلمة المرور يجب أن تكون 6 أحرف على الأقل.';return;}if(signupMode&&!login$('fullName').value.trim()){login$('msg').textContent='اكتب اسمك بالكامل.';return;}if(signupMode&&login$('accountType').value==='seller'&&(!login$('storeName').value.trim()||!login$('address').value.trim())){login$('msg').textContent='اكتب الاسم واسم المتجر والعنوان للبائع.';return;}login$('action').disabled=true;try{if(signupMode){const type=login$('accountType').value;const {data,error}=await loginDb.auth.signUp({email,password,options:{data:{phone,account_type:type,full_name:login$('fullName').value.trim(),store_name:login$('storeName').value.trim(),address:login$('address').value.trim()}}});if(error)throw error;if(data.session){const uid=data.session.user.id;const {data:profile}=await loginDb.from('profiles').select('account_type').eq('id',uid).maybeSingle();const typ=uid===ADMIN_UID?'admin':profile?.account_type;location.href='index.html?page='+(typ==='seller'?'seller':typ==='admin'?'admin':'buyer');}else login$('msg').textContent=type==='seller'?'تم إنشاء طلب البائع. بعد تأكيد البريد، سيظهر طلبك للمدير للمراجعة.':'تم إنشاء الحساب. إذا ظهر طلب تأكيد البريد، أكّد بريدك ثم سجّل الدخول.';}else{const {data,error}=await loginDb.auth.signInWithPassword({email,password});if(error)throw error;const uid=data.user.id;const {data:profile}=await loginDb.from('profiles').select('account_type').eq('id',uid).maybeSingle();const typ=uid===ADMIN_UID?'admin':profile?.account_type;location.href='index.html?page='+(typ==='seller'?'seller':typ==='admin'?'admin':'buyer');}}catch(e){login$('msg').textContent=e.message||'حدث خطأ غير متوقع. تأكد من إعداد Supabase ومفتاحه.';}finally{login$('action').disabled=false;}};
 }
 
+// ربط دوال الأزرار صراحةً بنافذة المتصفح حتى تعمل مع onclick
+Object.assign(window, {
+  add, buyNow, filterProducts, renderCat, changeQty, removeCart,
+  logout, openSideMenu, closeSideMenu, reviewSeller, setOrderStatus,
+  toggleProduct, delWish, delProd
+});
+
 </script>
 </body></html>
